@@ -13,6 +13,57 @@ This project demonstrates a robust, production-ready Continuous Integration and 
 
 ---
 
+## Project Architecture
+
+flowchart LR
+  %% Direction left to right
+  direction LR
+
+  %% Developer Side
+  subgraph Dev["👨‍💻 Developer Workspace"]
+    A1["📝 Code Commit & Push"]
+  end
+
+  %% GitHub CI/CD Flow
+  subgraph CI["🔄 GitHub Actions CI/CD Pipeline"]
+    B1["🛠️ CI Job Trigger"]
+    B2["🔐 Run tfsec (Terraform Audit)"]
+    B3["🧪 Run Trivy (Docker Scan)"]
+    B4["📜 Encrypt with Sealed Secrets"]
+  end
+
+  %% Terraform Infra on AWS
+  subgraph Cloud["☁️ AWS Infra Provisioning"]
+    C1["📂 S3 Bucket\n(Stores Build Artifacts)"]
+    C2["🔨 CodeBuild\n(Build + Test)"]
+    C3["📤 CodeDeploy\n(Deploy to EC2)"]
+    C4["🔗 CodePipeline\n(Workflow Manager)"]
+    C5["🛡️ IAM Policies\n(Permission Control)"]
+  end
+
+  %% Kubernetes
+  subgraph Kube["☸️ Kubernetes Cluster"]
+    D1["🔒 Sealed Secrets Controller"]
+    D2["🧩 Secret-Enabled Deployments"]
+    D3["📦 App Workloads"]
+  end
+
+  %% Flow Connections
+  A1 --> B1
+  B1 --> B2
+  B1 --> B3
+  B1 --> B4
+  B4 --> D1
+  D1 --> D2
+  D2 --> D3
+
+  B1 --> C4
+  C4 --> C1
+  C4 --> C2
+  C4 --> C3
+  C4 --> C5
+
+
 ##  Technologies Used
 
 | Tool               | Purpose                                           |
