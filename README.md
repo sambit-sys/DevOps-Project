@@ -1,4 +1,4 @@
-# Production-Grade CI/CD Pipeline with GitHub Actions, Terraform, and Sealed Secrets
+#  CI/CD Pipeline with GitHub Actions, Terraform, and Sealed Secrets
 
 This project demonstrates a robust, production-ready Continuous Integration and Continuous Deployment (CI/CD) pipeline setup. It utilizes **GitHub Actions** for automation, **Terraform** for infrastructure provisioning, and **Sealed Secrets** for secure management of sensitive information in **Kubernetes** clusters. This setup is ideal for teams seeking a scalable, secure, and automated deployment workflow.
 
