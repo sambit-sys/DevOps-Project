@@ -243,7 +243,7 @@ Set these in your repository settings under `Settings → Secrets and variables 
 
 ---
 
-## 🛡 Security Best Practices
+##  Security Best Practices
 
 - Use **Sealed Secrets** instead of raw Secrets.
 - Avoid storing `.env` or sensitive files in version control.
@@ -261,13 +261,3 @@ Set these in your repository settings under `Settings → Secrets and variables 
 - [Kubernetes Concepts](https://kubernetes.io/docs/concepts/)
 
 ---
-
-##  Contributing
-
-Contributions are welcome! To contribute:
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/your-feature`)
-3. Commit your changes
-4. Push to the branch
-5. Open a Pull Request
