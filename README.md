@@ -18,42 +18,42 @@ This project demonstrates a robust, production-ready Continuous Integration and 
 ```mermaid
 flowchart TB
   %% Theme styling
-  classDef dev fill:#e0f7fa,stroke:#00796b,stroke-width:2px;
-  classDef ci fill:#fff3e0,stroke:#fb8c00,stroke-width:2px;
+  classDef dev fill:#f0f4f8,stroke:#1e88e5,stroke-width:2px;
+  classDef ci fill:#fff8e1,stroke:#f9a825,stroke-width:2px;
   classDef aws fill:#ede7f6,stroke:#673ab7,stroke-width:2px;
-  classDef k8s fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
+  classDef k8s fill:#e8f5e9,stroke:#43a047,stroke-width:2px;
   classDef secure fill:#fce4ec,stroke:#c2185b,stroke-width:2px;
 
   %% Developer
-  subgraph DEV["👨‍💻 Developer"]
-    A1["💻 Push Code to GitHub"]:::dev
+  subgraph DEV["Developer Environment"]
+    A1["Push Code to GitHub"]:::dev
   end
 
   %% CI/CD Flow
-  subgraph CICD["🔁 GitHub Actions"]
-    B1["⚙️ Workflow Triggered"]:::ci
-    B2["🛡️ tfsec - Scan Terraform"]:::secure
-    B3["🔍 Trivy - Scan Docker"]:::secure
-    B4["🔐 Sealed Secrets CLI"]:::secure
+  subgraph CICD["GitHub Actions CI/CD Pipeline"]
+    B1["Workflow Triggered"]:::ci
+    B2["Terraform Security Scan (tfsec)"]:::secure
+    B3["Docker Image Vulnerability Scan (Trivy)"]:::secure
+    B4["Encrypt Kubernetes Secrets (Sealed Secrets CLI)"]:::secure
   end
 
-  %% AWS Infra
-  subgraph AWS["☁️ AWS (Terraform Managed)"]
-    C1["📦 S3 - Artifacts"]:::aws
-    C2["🔧 CodeBuild"]:::aws
-    C3["🚀 CodeDeploy"]:::aws
-    C4["🔁 CodePipeline"]:::aws
-    C5["🔐 IAM Policies"]:::aws
+  %% AWS Infrastructure
+  subgraph AWS["AWS Infrastructure (Provisioned via Terraform)"]
+    C1["S3 - Store Artifacts"]:::aws
+    C2["CodeBuild - Build Artifacts"]:::aws
+    C3["CodeDeploy - Deploy to Cluster"]:::aws
+    C4["CodePipeline - Orchestrate Build & Deploy"]:::aws
+    C5["IAM Policies and Roles"]:::aws
   end
 
   %% Kubernetes Cluster
-  subgraph K8S["☸️ Kubernetes Cluster"]
-    D1["🔒 SealedSecrets Controller"]:::k8s
-    D2["🧩 Secret-based Deployment"]:::k8s
-    D3["📦 App Workloads"]:::k8s
+  subgraph K8S["Kubernetes Cluster"]
+    D1["SealedSecrets Controller"]:::k8s
+    D2["Decryption and Secret Creation"]:::k8s
+    D3["Application Deployment"]:::k8s
   end
 
-  %% Flow
+  %% Flow connections
   A1 --> B1
   B1 --> B2
   B1 --> B3
@@ -69,7 +69,7 @@ flowchart TB
   D1 --> D2
   C3 --> D3
 
-  %% Clickable nodes
+  %% Clickable documentation links
   click B2 "https://aquasecurity.github.io/tfsec/" _blank
   click B3 "https://aquasecurity.github.io/trivy/" _blank
   click B4 "https://github.com/bitnami-labs/sealed-secrets" _blank
@@ -78,55 +78,6 @@ flowchart TB
   click C4 "https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html" _blank
   click D1 "https://github.com/bitnami-labs/sealed-secrets" _blank
 ```
-<!-- ```mermaid
-flowchart LR
-  %% Direction left to right
-  direction LR
-
-  %% Developer Side
-  subgraph Dev["👨‍💻 Developer Workspace"]
-    A1["📝 Code Commit & Push"]
-  end
-
-  %% GitHub CI/CD Flow
-  subgraph CI["🔄 GitHub Actions CI/CD Pipeline"]
-    B1["🛠️ CI Job Trigger"]
-    B2["🔐 Run tfsec (Terraform Audit)"]
-    B3["🧪 Run Trivy (Docker Scan)"]
-    B4["📜 Encrypt with Sealed Secrets"]
-  end
-
-  %% Terraform Infra on AWS
-  subgraph Cloud["☁️ AWS Infra Provisioning"]
-    C1["📂 S3 Bucket\n(Stores Build Artifacts)"]
-    C2["🔨 CodeBuild\n(Build + Test)"]
-    C3["📤 CodeDeploy\n(Deploy to EC2)"]
-    C4["🔗 CodePipeline\n(Workflow Manager)"]
-    C5["🛡️ IAM Policies\n(Permission Control)"]
-  end
-
-  %% Kubernetes
-  subgraph Kube["☸️ Kubernetes Cluster"]
-    D1["🔒 Sealed Secrets Controller"]
-    D2["🧩 Secret-Enabled Deployments"]
-    D3["📦 App Workloads"]
-  end
-
-  %% Flow Connections
-  A1 --> B1
-  B1 --> B2
-  B1 --> B3
-  B1 --> B4
-  B4 --> D1
-  D1 --> D2
-  D2 --> D3
-
-  B1 --> C4
-  C4 --> C1
-  C4 --> C2
-  C4 --> C3
-  C4 --> C5
-``` -->
 
 ##  Technologies Used
 
