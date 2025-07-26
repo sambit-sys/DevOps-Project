@@ -15,6 +15,7 @@ This project demonstrates a robust, production-ready Continuous Integration and 
 
 ## Project Architecture
 
+```mermaid
 flowchart LR
   %% Direction left to right
   direction LR
