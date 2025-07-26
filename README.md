@@ -16,6 +16,69 @@ This project demonstrates a robust, production-ready Continuous Integration and 
 ## Project Architecture
 
 ```mermaid
+flowchart TB
+  %% Theme styling
+  classDef dev fill:#e0f7fa,stroke:#00796b,stroke-width:2px;
+  classDef ci fill:#fff3e0,stroke:#fb8c00,stroke-width:2px;
+  classDef aws fill:#ede7f6,stroke:#673ab7,stroke-width:2px;
+  classDef k8s fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
+  classDef secure fill:#fce4ec,stroke:#c2185b,stroke-width:2px;
+
+  %% Developer
+  subgraph DEV["👨‍💻 Developer"]
+    A1["💻 Push Code to GitHub"]:::dev
+  end
+
+  %% CI/CD Flow
+  subgraph CICD["🔁 GitHub Actions"]
+    B1["⚙️ Workflow Triggered"]:::ci
+    B2["🛡️ tfsec - Scan Terraform"]:::secure
+    B3["🔍 Trivy - Scan Docker"]:::secure
+    B4["🔐 Sealed Secrets CLI"]:::secure
+  end
+
+  %% AWS Infra
+  subgraph AWS["☁️ AWS (Terraform Managed)"]
+    C1["📦 S3 - Artifacts"]:::aws
+    C2["🔧 CodeBuild"]:::aws
+    C3["🚀 CodeDeploy"]:::aws
+    C4["🔁 CodePipeline"]:::aws
+    C5["🔐 IAM Policies"]:::aws
+  end
+
+  %% Kubernetes Cluster
+  subgraph K8S["☸️ Kubernetes Cluster"]
+    D1["🔒 SealedSecrets Controller"]:::k8s
+    D2["🧩 Secret-based Deployment"]:::k8s
+    D3["📦 App Workloads"]:::k8s
+  end
+
+  %% Flow
+  A1 --> B1
+  B1 --> B2
+  B1 --> B3
+  B1 --> B4
+  B1 --> C4
+
+  C4 --> C1
+  C4 --> C2
+  C4 --> C3
+  C4 --> C5
+
+  B4 --> D1
+  D1 --> D2
+  C3 --> D3
+
+  %% Clickable nodes
+  click B2 "https://aquasecurity.github.io/tfsec/" _blank
+  click B3 "https://aquasecurity.github.io/trivy/" _blank
+  click B4 "https://github.com/bitnami-labs/sealed-secrets" _blank
+  click C2 "https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html" _blank
+  click C3 "https://docs.aws.amazon.com/codedeploy/latest/userguide/welcome.html" _blank
+  click C4 "https://docs.aws.amazon.com/codepipeline/latest/userguide/welcome.html" _blank
+  click D1 "https://github.com/bitnami-labs/sealed-secrets" _blank
+```
+<!-- ```mermaid
 flowchart LR
   %% Direction left to right
   direction LR
@@ -63,7 +126,7 @@ flowchart LR
   C4 --> C2
   C4 --> C3
   C4 --> C5
-```
+``` -->
 
 ##  Technologies Used
 
